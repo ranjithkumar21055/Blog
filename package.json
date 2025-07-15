@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/vite": "^4.1.11",
     "@tinymce/tinymce-react": "^6.2.1",
     "appwrite": "^18.1.1",
     "html-react-parser": "^5.2.5",
@@ -19,6 +20,7 @@
     "react-hook-form": "^7.60.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
+    "tailwindcss": "^4.1.11",
     "tinymce": "^7.9.1"
   },
   "devDependencies": {
