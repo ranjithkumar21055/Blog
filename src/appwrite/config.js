@@ -97,7 +97,7 @@ export class Service {
     }
 
     // File upload methods
-    async uploadFile(file){
+    async uploadFile(file) {
         try {
             return await this.storage.createFile(
                 conf.appwriteBucketId,
@@ -106,7 +106,7 @@ export class Service {
             )
         } catch (error) {
             console.error("Error uploading file:", error);
-            return false; 
+            return false;
         }
     }
 
