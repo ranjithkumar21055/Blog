@@ -16,6 +16,7 @@ function App() {
       if(userData){
         dispatch(login(userData))
       } else {
+        console.log('Logged out');
         dispatch(logout())
       }
     })
