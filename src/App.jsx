@@ -5,6 +5,7 @@ import { login, logout } from './store/authSlice'
 import Footer from './components/Footer/Footer'
 import  Header  from './components/Header/Header'
 import "./App.css";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,7 +35,7 @@ function App() {
         <Header/>
         <main>
           Todo 
-          {/* <Outlet/> */}
+          <Outlet/>
         </main>
         <Footer/>
       </div>

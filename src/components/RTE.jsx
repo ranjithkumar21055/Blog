@@ -9,8 +9,9 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
       <Controller
         name={name || "content"}
         control={control}
-        render={({ field: { onChange } }) => {
+        render={({ field: { onChange } }) => (
           <Editor
+            apiKey="7nmznz1i9dc9ujdlryiw9i20c29ruxtxu6zv6l93lr8air3r"
             initialValue={defaultValue}
             init={{
               initialValue: defaultValue,
@@ -44,8 +45,8 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
             onEditorChange={onChange}
-          />;
-        }}
+          />
+        )}
       />
     </div>
   );
