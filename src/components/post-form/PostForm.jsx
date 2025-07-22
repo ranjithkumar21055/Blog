@@ -16,13 +16,13 @@ function PostForm({ post }) {
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
-  const submit = async (data) => {        
+  const submit = async (data) => {
     if (post) {
-      data.image[0] ? appWriteService.uploadFile(data.image[0]) : null;
+      data.image[0] ? await appWriteService.uploadFile(data.image[0]) : null;
       if (file) {
-        appWriteService.deleteFile(post.featuredImage);
+        await appWriteService.deleteFile(post.featuredImage);
       }
       const dbPost = await appWriteService.updatePost(post.$id, {
         ...data,
@@ -35,6 +35,7 @@ function PostForm({ post }) {
       const file = await appWriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
+        console.log(userData.$id);
         data.featuredImage = fileId;
         const dbPost = await appWriteService.createPost({
           ...data,
@@ -52,8 +53,10 @@ function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
+        .replace(/[^\w\s-]/g, "") // Remove non-word chars (keep letters, numbers, spaces, dashes)
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/^-+|-+$/g, "") // Trim hyphens from start/end
+        .slice(0, 36); // Limit to 36 characters (Appwrite limit)
     }
     return "";
   }, []);
