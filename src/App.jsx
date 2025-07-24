@@ -34,7 +34,6 @@ function App() {
       <div className="w-full flex flex-col justify-between min-h-screen">
         <Header/>
         <main>
-          Todo 
           <Outlet/>
         </main>
         <Footer/>

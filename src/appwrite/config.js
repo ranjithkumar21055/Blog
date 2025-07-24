@@ -28,7 +28,8 @@ export class Service {
                     content,
                     featuredImage,
                     status,
-                    userId
+                    userId,
+                    slug
                 }
             )
         } catch (error) {
@@ -51,7 +52,6 @@ export class Service {
                 }
             )
         } catch (error) {
-            console.error("Error updating post:", error);
             throw error;
         }
     }
@@ -126,6 +126,16 @@ export class Service {
         )
     }
 
+    async listFiles() {
+        try {
+            return await this.storage.listFiles(
+                conf.appwriteBucketId
+            )
+        } catch (error) {
+            console.error("Error listing files:", error);
+            return false;
+        }
+    }
 }
 
 const service = new Service();

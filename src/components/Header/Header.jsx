@@ -36,7 +36,7 @@ const Header = () => {
     },
   ];
   return (
-    <header className='bg-white shadow bg-gray-500'>
+    <header className='shadow bg-white'>
       <Container>
         <nav className="flex">
           <div className="mr-4">
