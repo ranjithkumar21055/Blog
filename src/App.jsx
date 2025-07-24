@@ -5,7 +5,7 @@ import { login, logout } from './store/authSlice'
 import Footer from './components/Footer/Footer'
 import  Header  from './components/Header/Header'
 import "./App.css";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ function App() {
       }
     })
     .catch((error) => {
-      console.error('User not found', error);
+      
     })
     .finally(() => {
       setLoading(false)
@@ -31,7 +31,7 @@ function App() {
 
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-900 text-sky-100">
-      <div className="w-full block">
+      <div className="w-full flex flex-col justify-between min-h-screen">
         <Header/>
         <main>
           Todo 

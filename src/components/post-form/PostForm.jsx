@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
-  const { register, handleSubmit, watch, setValue, control, getValues } =
+  const { register, handleSubmit, watch, setValue, control, getValues, reset } =
     useForm({
       defaultValues: {
         title: post?.title || "",
@@ -15,12 +15,26 @@ function PostForm({ post }) {
         status: post?.status || "active",
       },
     });
+
+  useEffect(() => {
+    if (post) {
+      reset({
+        title: post.title || "",
+        slug: post.$id || "",
+        content: post.content || "",
+        status: post.status || "active",
+      });
+    }
+  }, [post, reset]);
+
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     if (post) {
-      data.image[0] ? await appWriteService.uploadFile(data.image[0]) : null;
+      const file = data.image[0]
+        ? await appWriteService.uploadFile(data.image[0])
+        : null;
       if (file) {
         await appWriteService.deleteFile(post.featuredImage);
       }
@@ -107,7 +121,7 @@ function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
-        {post && (
+        {post && post?.featuredImage && post.featuredImage !== "" && (
           <div className="w-full mb-4">
             <img
               src={appWriteService.getFilePreview(post.featuredImage)}

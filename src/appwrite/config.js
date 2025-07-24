@@ -65,7 +65,6 @@ export class Service {
             );
             return true;
         } catch (error) {
-            console.error("Error deleting post:", error);
             return false;
         }
     }
@@ -78,7 +77,6 @@ export class Service {
                 slug
             );
         } catch (error) {
-            console.error("Error fetching post:", error);
             return false;
         }
     }
@@ -91,7 +89,6 @@ export class Service {
                 queries
             )
         } catch (error) {
-            console.error("Error fetching posts:", error);
             throw error;
         }
     }
@@ -105,7 +102,6 @@ export class Service {
                 file
             )
         } catch (error) {
-            console.error("Error uploading file:", error);
             return false;
         }
     }
@@ -123,8 +119,11 @@ export class Service {
         }
     }
 
-    getFilePreview(fileId) {
-        return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
+    getFilePreview(fileId){
+        return this.storage.getFileView(
+            conf.appwriteBucketId,
+            fileId
+        )
     }
 
 }

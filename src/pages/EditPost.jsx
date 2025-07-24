@@ -19,13 +19,13 @@ function EditPost() {
             navigate('/')
         }
     }, [slug, navigate])
-  return post ? (
+return post ? (
     <div className='py-8'>
         <Container>
-            <PostForm {...post} />
+            <PostForm post={post} />
         </Container>
     </div>
-  ) : null
+) : null
 }
 
 export default EditPost

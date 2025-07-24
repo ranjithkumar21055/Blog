@@ -41,7 +41,6 @@ export class AuthService {
         try {
             return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
-            console.error("Error logging in:", error);
             throw error;
         }
     }
@@ -50,7 +49,6 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error){
-            console.error("Error fetching current user:", error);
             throw error;
         }
     }

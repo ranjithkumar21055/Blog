@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import appWriteService from "../appwrite/config";
 import { Container, PostCard } from "../components";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const authStatus = useSelector((state) => state.auth.status);
   useEffect(() => {
-    appWriteService.getPosts([]).then((posts) => {
-      setPosts(posts.documents);
-    });
-  }, []);
-  if (posts.length === 0) {
+    if (authStatus) {
+      appWriteService.getPosts([]).then((posts) => {
+        setPosts(posts.documents);
+      });
+    }
+  }, [authStatus]);
+  if (!authStatus) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
