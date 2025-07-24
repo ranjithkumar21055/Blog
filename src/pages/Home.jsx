@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import appWriteService from "../appwrite/config";
-import { Container, PostCard } from "../components";
+import { Button, Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const authStatus = useSelector((state) => state.auth.status);
+  const navigate = useNavigate()
   useEffect(() => {
     if (authStatus) {
       appWriteService.getPosts([]).then((posts) => {
@@ -19,9 +21,12 @@ function Home() {
         <Container>
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
-              <h1 className="text-2xl font-bold hover:text-gray-500">
+              <h1 className="text-2xl font-bold">
                 Login to read posts
               </h1>
+              <Button className="mt-10 min-w-[150px]" onClick={() => navigate("/login")}>
+                Login
+              </Button>
             </div>
           </div>
         </Container>
